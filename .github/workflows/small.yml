@@ -29,18 +29,6 @@ jobs:
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
 
-      - name: Copy files to public_python
-        run: |
-          ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_LOGIN }}@${{ secrets.SSH_HOST }} "rsync -av /usr/home/${{ secrets.SSH_LOGIN }}/domains/${{ secrets.WEB_NAME }}/public_python/fantastic-robot/ /usr/home/${{ secrets.SSH_LOGIN }}/domains/${{ secrets.WEB_NAME }}/public_python/"
-        env:
-          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-
-      - name: Remove fantastic-robot directory
-        run: |
-          ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_LOGIN }}@${{ secrets.SSH_HOST }} "rm -rf /usr/home/${{ secrets.SSH_LOGIN }}/domains/${{ secrets.WEB_NAME }}/public_python/fantastic-robot"
-        env:
-          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-
       - name: Install requirements
         run: |
           ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_LOGIN }}@${{ secrets.SSH_HOST }} "pip install -r /usr/home/${{ secrets.SSH_LOGIN }}/domains/${{ secrets.WEB_NAME }}/public_python/requirements.txt"
