@@ -21,6 +21,6 @@ jobs:
 
     - name: Deploy to server
       run: |
-        ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_LOGIN }}@${{ secrets.SSH_HOST }} "cd /usr/home/${{ secrets.SSH_LOGIN }}/domains/${{ secrets.WEB_NAME }}/public_python && python3.11 -m venv venv && source venv/bin/activate && git clone https://github.com/kami2/fantastic-robot.git && mv fantastic-robot/* ./ && mv fantastic-robot/.* ./ && rmdir fantastic-robot && pip install -r requirements.txt"
+        ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_LOGIN }}@${{ secrets.SSH_HOST }} "cd /usr/home/${{ secrets.SSH_LOGIN }}/domains/${{ secrets.WEB_NAME }}/public_python && git clone https://github.com/kami2/fantastic-robot.git && mv fantastic-robot/* ./ && mv fantastic-robot/.* ./ && rmdir fantastic-robot && pip install -r requirements.txt"
       env:
         SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
