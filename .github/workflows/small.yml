@@ -21,7 +21,7 @@ jobs:
 
       - name: Activate virtual environment
         run: |
-          ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_LOGIN }}@${{ secrets.SSH_HOST }} "source /usr/home/${{ secrets.SSH_LOGIN }}/worker/source/bin/activate"
+          ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_LOGIN }}@${{ secrets.SSH_HOST }} "source /usr/home/${{ secrets.SSH_LOGIN }}/worker/bin/activate"
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
 
