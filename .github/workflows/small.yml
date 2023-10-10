@@ -25,9 +25,9 @@ jobs:
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
 
-      - name: Pull the repository
+      - name: Clone the repository
         run: |
-          ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_LOGIN }}@${{ secrets.SSH_HOST }} "cd /usr/home/${{ secrets.SSH_LOGIN }}/domains/${{ secrets.WEB_NAME }}/public_python && git pull https://github.com/kami2/fantastic-robot.git"
+          ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_LOGIN }}@${{ secrets.SSH_HOST }} "cd /usr/home/${{ secrets.SSH_LOGIN }}/domains/${{ secrets.WEB_NAME }}/public_python && git clone https://github.com/kami2/fantastic-robot.git ."
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
 
