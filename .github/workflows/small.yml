@@ -25,7 +25,7 @@ jobs:
 
       - name: Update the repository
         run: |
-          ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_LOGIN }}@${{ secrets.SSH_HOST }} "cd /usr/home/${{ secrets.SSH_LOGIN }}/domains/${{ secrets.WEB_NAME }}/public_python/fantastic-robot && git pull"
+          ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_LOGIN }}@${{ secrets.SSH_HOST }} "cd /usr/home/${{ secrets.SSH_LOGIN }}/domains/${{ secrets.WEB_NAME }}/public_python && git pull"
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
 
