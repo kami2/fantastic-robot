@@ -17,20 +17,23 @@ jobs:
         with:
           ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
 
+      - name: Build Python Package
+        run: |
+          python -m build
+          mkdir -p dist
+          mv dist/*.tar.gz dist/worker.tar.gz
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+
       - name: Activate virtual environment
         run: |
           ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_LOGIN }}@${{ secrets.SSH_HOST }} "source /usr/home/${{ secrets.SSH_LOGIN }}/worker/bin/activate"
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
 
-      - name: Update the repository
+      - name: Deploy Package to Server
         run: |
-          ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_LOGIN }}@${{ secrets.SSH_HOST }} "cd /usr/home/${{ secrets.SSH_LOGIN }}/domains/${{ secrets.WEB_NAME }}/public_python && git pull"
-        env:
-          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-
-      - name: Install requirements
-        run: |
-          ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_LOGIN }}@${{ secrets.SSH_HOST }} "pip install -r /usr/home/${{ secrets.SSH_LOGIN }}/domains/${{ secrets.WEB_NAME }}/public_python/requirements.txt"
+          scp dist/yourapp.tar.gz ${{ secrets.SSH_LOGIN }}@${{ secrets.SSH_HOST }}:/usr/home/${{ secrets.SSH_LOGIN }}/domains/${{ secrets.WEB_NAME }}/public_python
+          cd /usr/home/${{ secrets.SSH_LOGIN }}/domains/${{ secrets.WEB_NAME }}/public_python && tar -xzf yourapp.tar.gz
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
