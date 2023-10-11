@@ -46,8 +46,11 @@ jobs:
           scp dist/worker.tar.gz ${{ secrets.SSH_LOGIN }}@${{ secrets.SSH_HOST }}:/usr/home/${{ secrets.SSH_LOGIN }}/domains/${{ secrets.WEB_NAME }}/worker.tar.gz
           ssh ${{ secrets.SSH_LOGIN }}@${{ secrets.SSH_HOST }} 'cd /usr/home/${{ secrets.SSH_LOGIN }}/domains/${{ secrets.WEB_NAME }}'
 
-          # Extract the package to the "public_python" directory directly
-          tar -xzf /usr/home/${{ secrets.SSH_LOGIN }}/domains/${{ secrets.WEB_NAME }}/worker.tar.gz -C /usr/home/${{ secrets.SSH_LOGIN }}/domains/${{ secrets.WEB_NAME }}/public_python
+          # Extract the package to a temporary directory
+          tar -xzf /usr/home/${{ secrets.SSH_LOGIN }}/domains/${{ secrets.WEB_NAME }}/worker.tar.gz -C /usr/home/${{ secrets.SSH_LOGIN }}/domains/${{ secrets.WEB_NAME }}/temp_directory
+
+          # Rename the "fantastic-robot-1" directory to "public_python"
+          mv /usr/home/${{ secrets.SSH_LOGIN }}/domains/${{ secrets.WEB_NAME }}/temp_directory/fantastic-robot-1 /usr/home/${{ secrets.SSH_LOGIN }}/domains/${{ secrets.WEB_NAME }}/public_python
 
           # Clean up
           rm /usr/home/${{ secrets.SSH_LOGIN }}/domains/${{ secrets.WEB_NAME }}/worker.tar.gz
