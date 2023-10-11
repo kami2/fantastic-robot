@@ -38,7 +38,7 @@ jobs:
       - name: Deploy Package to Server
         run: |
           scp dist/worker.tar.gz ${{ secrets.SSH_LOGIN }}@${{ secrets.SSH_HOST }}:/usr/home/${{ secrets.SSH_LOGIN }}/domains/${{ secrets.WEB_NAME }}/worker.tar.gz
-          ssh ${{ secrets.SSH_LOGIN }}@${{ secrets.SSH_HOST }} 'cd /usr/home/${{ secrets.SSH_LOGIN }}/domains/${{ secrets.WEB_NAME }} && tar -xzf worker.tar.gz'
+          ssh ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_LOGIN }}@${{ secrets.SSH_HOST }} 'cd /usr/home/${{ secrets.SSH_LOGIN }}/domains/${{ secrets.WEB_NAME }} && tar -xzf worker.tar.gz'
           ssh ${{ secrets.SSH_LOGIN }}@${{ secrets.SSH_HOST }} 'cd /usr/home/${{ secrets.SSH_LOGIN }}/domains/${{ secrets.WEB_NAME }} && mv fantastic-robot-1 public_python'
           ssh ${{ secrets.SSH_LOGIN }}@${{ secrets.SSH_HOST }} 'cd /usr/home/${{ secrets.SSH_LOGIN }}/domains/${{ secrets.WEB_NAME }} && rm worker.tar.gz'
 
@@ -47,6 +47,6 @@ jobs:
 
       - name: Install Python App
         run: |
-          ssh ${{ secrets.SSH_LOGIN }}@${{ secrets.SSH_HOST }} "source /usr/home/${{ secrets.SSH_LOGIN }}/worker/bin/activate" && 'cd /usr/home/${{ secrets.SSH_LOGIN }}/domains/${{ secrets.WEB_NAME }}/public_python && pip install .'
+          ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_LOGIN }}@${{ secrets.SSH_HOST }} "source /usr/home/${{ secrets.SSH_LOGIN }}/worker/bin/activate" && 'cd /usr/home/${{ secrets.SSH_LOGIN }}/domains/${{ secrets.WEB_NAME }}/public_python && pip install .'
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
