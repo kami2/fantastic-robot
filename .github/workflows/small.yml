@@ -44,6 +44,6 @@ jobs:
       - name: Deploy Package to Server
         run: |
           scp dist/worker.tar.gz ${{ secrets.SSH_LOGIN }}@${{ secrets.SSH_HOST }}:/usr/home/${{ secrets.SSH_LOGIN }}/domains/${{ secrets.WEB_NAME }}/worker.tar.gz
-          ssh ${{ secrets.SSH_LOGIN }}@${{ secrets.SSH_HOST }} 'cd /usr/home/${{ secrets.SSH_LOGIN }}/domains/${{ secrets.WEB_NAME }} && tar -xzf worker.tar.gz && mv worker/* ./public_python && rmdir worker'
+          ssh ${{ secrets.SSH_LOGIN }}@${{ secrets.SSH_HOST }} 'cd /usr/home/${{ secrets.SSH_LOGIN }}/domains/${{ secrets.WEB_NAME }} && mkdir -p public_python && tar -xzf worker.tar.gz -C public_python && rm worker.tar.gz'
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
