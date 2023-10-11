@@ -7,7 +7,7 @@ exclude = ["static", "templates"]
 
 [project]
 name = "fantastic-robot"
-version = "0.0.1"
+version = "1"
 authors = [
   { name="Kami2" },
 ]
