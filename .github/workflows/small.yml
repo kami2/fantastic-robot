@@ -15,7 +15,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v2
         with:
-          python-version: 3.11
+          python-version: 3.10
 
       - name: Install build module
         run: |
@@ -37,8 +37,8 @@ jobs:
 
       - name: Deploy Package to Server
         run: |
-          scp dist/worker.tar.gz ${{ secrets.SSH_LOGIN }}@${{ secrets.SSH_HOST }}:/usr/home/${{ secrets.SSH_LOGIN }}/domains/${{ secrets.WEB_NAME }}/worker.tar.gz
-          ssh ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_LOGIN }}@${{ secrets.SSH_HOST }} 'cd /usr/home/${{ secrets.SSH_LOGIN }}/domains/${{ secrets.WEB_NAME }} && tar -xzf worker.tar.gz'
+          scp dist/worker.tar.gz -o StrictHostKeyChecking=no ${{ secrets.SSH_LOGIN }}@${{ secrets.SSH_HOST }}:/usr/home/${{ secrets.SSH_LOGIN }}/domains/${{ secrets.WEB_NAME }}/worker.tar.gz
+          ssh ${{ secrets.SSH_LOGIN }}@${{ secrets.SSH_HOST }} 'cd /usr/home/${{ secrets.SSH_LOGIN }}/domains/${{ secrets.WEB_NAME }} && tar -xzf worker.tar.gz'
           ssh ${{ secrets.SSH_LOGIN }}@${{ secrets.SSH_HOST }} 'cd /usr/home/${{ secrets.SSH_LOGIN }}/domains/${{ secrets.WEB_NAME }} && mv fantastic-robot-1 public_python'
           ssh ${{ secrets.SSH_LOGIN }}@${{ secrets.SSH_HOST }} 'cd /usr/home/${{ secrets.SSH_LOGIN }}/domains/${{ secrets.WEB_NAME }} && rm worker.tar.gz'
 
