@@ -45,6 +45,6 @@ jobs:
 
       - name: Activate virtual environment and Install app
         run: |
-          ssh ${{ secrets.SSH_LOGIN }}@${{ secrets.SSH_HOST }} "source /usr/home/${{ secrets.SSH_LOGIN }}/worker/bin/activate && cd /usr/home/${{ secrets.SSH_LOGIN }}/domains/${{ secrets.WEB_NAME }}/public_python && pip install fantastic_robot"
+          ssh ${{ secrets.SSH_LOGIN }}@${{ secrets.SSH_HOST }} "source /usr/home/${{ secrets.SSH_LOGIN }}/worker/bin/activate && cd /usr/home/${{ secrets.SSH_LOGIN }}/domains/${{ secrets.WEB_NAME }}/public_python && pip install fantastic_robot-0.0.1-py3-none-any.whl"
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
