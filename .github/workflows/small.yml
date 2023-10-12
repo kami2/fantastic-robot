@@ -37,7 +37,7 @@ jobs:
 
       - name: Copy Package to Server
         run: |
-          scp -i StrictHostKeyChecking=no dist/fantastic-robot.whl ${{ secrets.SSH_LOGIN }}@${{ secrets.SSH_HOST }}:/usr/home/${{ secrets.SSH_LOGIN }}/domains/${{ secrets.WEB_NAME }}/public_python/
+          scp -o StrictHostKeyChecking=no -i dist/fantastic-robot.whl ${{ secrets.SSH_LOGIN }}@${{ secrets.SSH_HOST }}:/usr/home/${{ secrets.SSH_LOGIN }}/domains/${{ secrets.WEB_NAME }}/public_python/
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
 
