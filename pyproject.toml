@@ -7,13 +7,13 @@ exclude = ["static", "templates"]
 
 [project]
 name = "fantastic-robot"
-version = "1"
+version = "0.0.1"
 authors = [
-  { name="Kami2" },
+  { name="Kamil" },
 ]
-description = "Test deployment service"
+description = "Service worker"
 readme = "README.md"
-requires-python = ">=3.10.1"
+requires-python = ">=3.9"
 classifiers = [
     "Programming Language :: Python :: 3",
     "License :: OSI Approved :: MIT License",
@@ -24,3 +24,6 @@ dependencies = ['flask']
 
 [project.urls]
 "Homepage" = "https://github.com/kami2/fantastic-robot"
+
+[tool.setuptools.packages.find]
+include = ["fantastic-robot*"]
