@@ -3,11 +3,11 @@ requires = ["setuptools>=61.0"]
 build-backend = "setuptools.build_meta"
 
 [tool.setuptools.packages.find]
-include = ["fantastic-robot*"]
+include = ["fantastic_robot*"]
 exclude = ["static", "templates"]
 
 [project]
-name = "fantastic-robot"
+name = "fantastic_robot"
 version = "0.0.1"
 authors = [
   { name="Kamil" },
