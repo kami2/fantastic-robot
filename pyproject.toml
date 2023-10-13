@@ -24,4 +24,4 @@ classifiers = [
 dependencies = ['flask']
 
 [project.urls]
-"Homepage" = "https://github.com/kami2/fantastic-robot"
+"Homepage" = "https://github.com/kami2/smallworker"
