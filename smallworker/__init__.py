@@ -8,7 +8,7 @@ logging.basicConfig(level=logging.DEBUG, handlers=[logging.StreamHandler()])
 
 # scheduler
 scheduler = BackgroundScheduler(daemon=True)
-scheduler.add_job(add_event, 'interval', minutes=20)
+scheduler.add_job(add_event, 'interval', hours=10)
 scheduler.start()
 
 import smallworker.routes
