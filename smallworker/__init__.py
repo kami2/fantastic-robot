@@ -1,6 +1,5 @@
 from flask import Flask
 import logging
-from smallworker.helpers.route_helper import add_event
 from apscheduler.schedulers.background import BackgroundScheduler
 
 app = Flask(__name__)
