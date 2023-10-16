@@ -8,6 +8,7 @@ CONFIG = load_dotenv(DEFAULT_CONFIG)
 
 
 def get_config(key: str):
-    logging.info(f"Get environment variable {key}")
-    return os.environ.get(key)
+    env = os.environ.get(key)
+    logging.info(f"Get environment variable {key} : {env}")
+    return env
 
