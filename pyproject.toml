@@ -23,7 +23,8 @@ classifiers = [
 dependencies = [
     'flask',
     'requests',
-    'python-dotenv'
+    'python-dotenv',
+    'apscheduler'
 ]
 
 [project.urls]
