@@ -13,7 +13,7 @@ scheduler.start()
 
 
 @app.teardown_appcontext
-def stop_scheduler():
+def stop_scheduler(exception=None):
     scheduler.shutdown()
 
 
