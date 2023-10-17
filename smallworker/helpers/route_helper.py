@@ -12,7 +12,7 @@ def get_headers():
 
 def add_event():
     event_data = {
-        "Event": "Added remotely from small worker",
+        "Event": "Added remotely from small worker, interval : 5H",
         "Scheduled": True
     }
     response = requests.post('https://chaotic.vercel.app/add_event', headers=get_headers(), data=json.dumps(event_data))
