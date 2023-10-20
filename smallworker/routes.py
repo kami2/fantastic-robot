@@ -15,3 +15,7 @@ def main():
     results = render_template("index.html", enter_text=enter_text)
     return results
 
+
+@app.route("/debug_state")
+def debug_state():
+    return {"Debug": app.debug}

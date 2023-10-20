@@ -4,6 +4,7 @@ from smallworker.helpers.route_helper import add_event, generate_image
 from apscheduler.schedulers.background import BackgroundScheduler
 
 app = Flask(__name__)
+app.debug = False
 logging.basicConfig(level=logging.DEBUG, handlers=[logging.StreamHandler()])
 
 # scheduler
