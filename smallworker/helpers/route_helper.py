@@ -21,7 +21,7 @@ def add_event():
 
 def generate_image():
     event_data = {
-        "Event": "Generated image from worker, interval : 4H",
+        "Event": "Generated image from worker, interval : 1H",
         "Scheduled": True
     }
     response = requests.post('https://chaotic.vercel.app/add_event', headers=get_headers(), data=json.dumps(event_data))
