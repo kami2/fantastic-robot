@@ -28,9 +28,9 @@ def app_info():
     app_data = {
         "Debug": app.debug,
         "Start Time": str(start_time),
-        "Uptime": f"{round((datetime.datetime.utcnow() - start_time).total_seconds() / 3600, 3)}H"
+        "Uptime": f"{round((datetime.datetime.utcnow() - start_time).total_seconds() / 3600, 2)}H"
     }
-    return jsonify(app_data)
+    return jsonify(**app_data)
 
 
 @app.route("/generate_prompt")
