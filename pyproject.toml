@@ -24,7 +24,8 @@ dependencies = [
     'flask',
     'requests',
     'python-dotenv',
-    'apscheduler'
+    'apscheduler',
+    'openai'
 ]
 
 [project.urls]
