@@ -30,7 +30,7 @@ def app_info():
         "Start Time": str(start_time),
         "Uptime": f"{round((datetime.datetime.utcnow() - start_time).total_seconds() / 3600, 2)}H"
     }
-    return jsonify(**app_data)
+    return app_data
 
 
 @app.route("/generate_prompt")
