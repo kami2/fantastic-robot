@@ -25,7 +25,8 @@ dependencies = [
     'requests',
     'python-dotenv',
     'apscheduler',
-    'openai'
+    'openai',
+    'pytz'
 ]
 
 [project.urls]

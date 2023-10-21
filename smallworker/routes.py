@@ -1,4 +1,5 @@
 import datetime
+import pytz
 
 from flask import render_template
 from smallworker import app
@@ -24,7 +25,7 @@ def main():
 def app_info():
     start_time_str = get_config("APP_START_TIME")
     date_format = "%Y-%m-%d %H:%M:%S"
-    start_time = datetime.datetime.strptime(start_time_str, date_format)
+    start_time = (datetime.datetime.strptime(start_time_str, date_format)).replace(tzinfo=pytz.UTC)
     app_data = {
         "Debug": app.debug,
         "Start Time": str(start_time),
