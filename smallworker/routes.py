@@ -1,6 +1,5 @@
 import datetime
-import pytz
-
+from flask import jsonify
 from flask import render_template
 from smallworker import app
 import requests
@@ -29,9 +28,9 @@ def app_info():
     app_data = {
         "Debug": app.debug,
         "Start Time": str(start_time),
-        "Uptime": str((datetime.datetime.utcnow() - start_time).total_seconds() / 3600)
+        "Uptime": f"{round((datetime.datetime.utcnow() - start_time).total_seconds() / 3600, 2)}H"
     }
-    return app_data
+    return jsonify(app_data)
 
 
 @app.route("/generate_prompt")
