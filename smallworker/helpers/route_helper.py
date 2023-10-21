@@ -10,19 +10,17 @@ def get_headers():
     }
 
 
-def add_event():
-    event_data = {
-        "Event": "Added remotely from small worker, interval : 5H",
-        "Scheduled": True
+def add_event(event_data):
+    event_payload = {
+        "Event": event_data
     }
-    response = requests.post('https://chaotic.vercel.app/add_event', headers=get_headers(), data=json.dumps(event_data))
+    response = requests.post('https://chaotic.vercel.app/add_event', headers=get_headers(), data=json.dumps(event_payload))
     return response
 
 
 def generate_image():
-    event_data = {
-        "Event": "Generated image from worker, interval : 1H",
-        "Scheduled": True
-    }
-    response = requests.post('https://chaotic.vercel.app/add_event', headers=get_headers(), data=json.dumps(event_data))
-    return response
+    return add_event("Generated image from worker, interval : 1H")
+
+
+def log_start_app_time(start_time):
+    return add_event(f"App started at {str(start_time)}")

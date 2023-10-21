@@ -1,3 +1,5 @@
+import datetime
+
 from flask import render_template
 from smallworker import app
 import requests
@@ -21,7 +23,12 @@ def main():
 
 @app.route("/app_info")
 def app_info():
-    return {"Debug": app.debug, "Start Time": str(start_time)}
+    app_data = {
+        "Debug": app.debug,
+        "Start Time": str(start_time),
+        "Uptime": str((datetime.datetime.now() - start_time).total_seconds() / 3600)
+    }
+    return app_data
 
 
 @app.route("/generate_prompt")
