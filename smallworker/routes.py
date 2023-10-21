@@ -22,12 +22,14 @@ def main():
 
 @app.route("/app_info")
 def app_info():
-    start_time = get_config("APP_START_TIME")
+    start_time_str = get_config("APP_START_TIME")
+    date_format = "%Y-%m-%d %H:%M:%S"
+    start_time = datetime.datetime.strptime(start_time_str, date_format)
     app_data = {
         "Debug": app.debug,
-        "Start Time": start_time
+        "Start Time": str(start_time),
+        "Uptime": str((datetime.datetime.utcnow() - start_time).total_seconds() / 3600)
     }
-    # "Uptime": str((datetime.datetime.now() - start_time).total_seconds() / 3600)
     return app_data
 
 
