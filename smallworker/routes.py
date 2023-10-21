@@ -5,7 +5,6 @@ from smallworker import app
 import requests
 import openai
 from smallworker.utils.config import get_config
-from smallworker import start_time
 
 
 @app.route("/event_store", methods=['GET'])
@@ -23,11 +22,12 @@ def main():
 
 @app.route("/app_info")
 def app_info():
+    start_time = get_config("APP_START_TIME")
     app_data = {
         "Debug": app.debug,
-        "Start Time": str(start_time),
-        "Uptime": str((datetime.datetime.now() - start_time).total_seconds() / 3600)
+        "Start Time": start_time
     }
+    # "Uptime": str((datetime.datetime.now() - start_time).total_seconds() / 3600)
     return app_data
 
 
