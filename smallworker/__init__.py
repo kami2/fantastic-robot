@@ -13,7 +13,7 @@ logging.basicConfig(level=logging.DEBUG,
 
 if not app.debug or os.environ.get('WERKZEUG_RUN_MAIN') == 'true':
     scheduler = BackgroundScheduler(daemon=True)
-    scheduler.add_job(generate_image, 'interval', jobstore='generator', hours=1)
+    scheduler.add_job(generate_image, 'interval', hours=1)
     scheduler.start()
 
 
