@@ -5,7 +5,9 @@ from apscheduler.schedulers.background import BackgroundScheduler
 
 app = Flask(__name__)
 app.debug = False
-logging.basicConfig(level=logging.DEBUG, handlers=[logging.StreamHandler()])
+logging.basicConfig(level=logging.DEBUG,
+                    format='%(asctime)s | LEVEL: %(levelname)s | %(message)s',
+                    handlers=[logging.StreamHandler()])
 
 
 scheduler = BackgroundScheduler(daemon=True)
