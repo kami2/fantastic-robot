@@ -1,6 +1,6 @@
 from flask import Flask
 import logging
-from smallworker.helpers.route_helper import add_event, generate_image
+from smallworker.helpers.route_helper import generate_image
 from apscheduler.schedulers.background import BackgroundScheduler
 
 app = Flask(__name__)

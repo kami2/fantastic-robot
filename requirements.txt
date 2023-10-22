@@ -3,4 +3,3 @@ requests
 python-dotenv
 apscheduler
 openai
-pytz
