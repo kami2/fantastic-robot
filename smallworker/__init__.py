@@ -1,5 +1,6 @@
 from flask import Flask
 import logging
+import os
 from smallworker.helpers.route_helper import generate_image
 from apscheduler.schedulers.background import BackgroundScheduler
 
@@ -10,9 +11,10 @@ logging.basicConfig(level=logging.DEBUG,
                     handlers=[logging.StreamHandler()])
 
 
-scheduler = BackgroundScheduler(daemon=True)
-scheduler.add_job(generate_image, 'interval', hours=1)
-scheduler.start()
+if not app.debug or os.environ.get('WERKZEUG_RUN_MAIN') == 'true':
+    scheduler = BackgroundScheduler(daemon=True)
+    scheduler.add_job(generate_image, 'interval', jobstore='generator', hours=1)
+    scheduler.start()
 
 
 import smallworker.routes
