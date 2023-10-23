@@ -4,6 +4,8 @@ import os
 from smallworker.helpers.route_helper import generate_image
 from apscheduler.schedulers.background import BackgroundScheduler
 
+os.environ['FLASK_ENV'] = 'production'
+
 app = Flask(__name__)
 app.debug = False
 logging.basicConfig(level=logging.DEBUG,
@@ -11,7 +13,7 @@ logging.basicConfig(level=logging.DEBUG,
                     handlers=[logging.StreamHandler()])
 
 
-scheduler = BackgroundScheduler(daemon=True)
+scheduler = BackgroundScheduler()
 scheduler.add_job(generate_image, 'interval', hours=1)
 scheduler.start()
 
