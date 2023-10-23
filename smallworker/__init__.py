@@ -9,12 +9,12 @@ os.environ['FLASK_ENV'] = 'production'
 app = Flask(__name__)
 app.debug = False
 logging.basicConfig(level=logging.DEBUG,
-                    format='%(asctime)s | LEVEL: %(levelname)s | %(message)s | %(processName)s',
+                    format='%(asctime)s | PROCESS: %(processName)s | LEVEL: %(levelname)s | %(message)s ',
                     handlers=[logging.StreamHandler()])
 
 
 scheduler = BackgroundScheduler()
-scheduler.add_job(generate_image, 'interval', hours=1)
+scheduler.add_job(generate_image, 'interval', args=["10 minutes"], minutes=10)
 scheduler.start()
 
 
