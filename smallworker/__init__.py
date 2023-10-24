@@ -14,7 +14,7 @@ logging.basicConfig(level=logging.DEBUG,
 
 
 scheduler = Scheduler().scheduler
-scheduler.add_job(generate_image, 'interval', args=["10 minutes"], minutes=10)
+scheduler.add_job(generate_image, 'interval', args=["4 H"], hours=4)
 scheduler.start()
 
 
