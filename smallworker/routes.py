@@ -1,9 +1,7 @@
 import datetime
-from flask import jsonify
 from flask import render_template
 from smallworker import app
 import requests
-import openai
 from smallworker.utils.config import get_config
 
 
@@ -32,16 +30,3 @@ def app_info():
     }
     return app_data
 
-
-@app.route("/generate_prompt")
-def generate_prompt():
-    openai.api_key = get_config("OPEN_AI_APIKEY")
-    completion = openai.ChatCompletion.create(
-        model="davinci-002",
-        messages=[
-            {"role": "system",
-             "content": "You are a poetic assistant, skilled in explaining complex programming concepts with creative flair."},
-            {"role": "user", "content": "Compose a poem that explains the concept of recursion in programming."}
-        ]
-    )
-    return completion
