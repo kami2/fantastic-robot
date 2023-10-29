@@ -1,7 +1,7 @@
 from flask import Flask
 import logging
 import os
-from smallworker.helpers.route_helper import generate_image
+from smallworker.helpers.route_helper import image_event
 from smallworker.helpers.scheduler_helper import Scheduler
 
 os.environ['FLASK_ENV'] = 'production'
@@ -14,7 +14,7 @@ logging.basicConfig(level=logging.DEBUG,
 
 
 scheduler = Scheduler().scheduler
-scheduler.add_job(generate_image, 'interval', args=["4 H"], hours=4)
+scheduler.add_job(image_event, 'interval', hours=12)
 scheduler.start()
 
 

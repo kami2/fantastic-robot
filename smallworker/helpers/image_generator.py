@@ -17,6 +17,7 @@ def get_headers():
 
 
 def generate_prompt():
+    logging.info("Generating prompt process")
     random_year = random.randint(1400, 2020)
     openai.api_key = get_config("OPEN_AI_APIKEY")
     try:

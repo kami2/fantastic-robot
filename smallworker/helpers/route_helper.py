@@ -33,7 +33,8 @@ def image_event():
                 for image in generation['generated_images']:
                     payload = {
                         "prompt": generation['prompt'],
-                        "file_url": image['url']
+                        "file_url": image['url'],
+                        "created_at": generation['createdAt']
                     }
                     response = requests.post("https://chaotic.vercel.app/process_generated_image", json=payload, headers=get_headers())
                     if response.status_code != 200:
@@ -42,10 +43,6 @@ def image_event():
         logging.info(f"Image event failed: {e}")
 
     return add_event("Generated image send from worker")
-
-
-def generate_image(interval: str):
-    return add_event(f"Generated image from worker, interval : {interval}")
 
 
 def log_start_app_time(start_time):
