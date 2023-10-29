@@ -2,6 +2,7 @@ import json
 import requests
 import logging
 from smallworker.utils.config import get_config
+from smallworker.helpers.image_generator import generate_prompt, create_generation, get_generation
 
 
 def get_headers():
@@ -20,6 +21,29 @@ def add_event(event_data):
     return response
 
 
+def image_event():
+    logging.info("Image event start")
+    try:
+        prompt = generate_prompt()
+        generate_id = create_generation(prompt)
+        generations = get_generation(generate_id)
+        if generations:
+            logging.info(f"Generation {generate_id} is ready to process")
+            for generation in generations:
+                for image in generation['generated_images']:
+                    payload = {
+                        "prompt": generation['prompt'],
+                        "file_url": image['url']
+                    }
+                    response = requests.post("https://chaotic.vercel.app/process_generated_image", json=payload, headers=get_headers())
+                    if response.status_code != 200:
+                        continue
+    except Exception as e:
+        logging.info(f"Image event failed: {e}")
+
+    return add_event("Generated image send from worker")
+
+
 def generate_image(interval: str):
     return add_event(f"Generated image from worker, interval : {interval}")
 
@@ -27,3 +51,4 @@ def generate_image(interval: str):
 def log_start_app_time(start_time):
     logging.info(f"App started at {start_time}")
     return add_event(f"Deployed at {str(start_time)}")
+
