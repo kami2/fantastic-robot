@@ -51,5 +51,9 @@ def log_start_app_time(start_time):
     return add_event(f"Deployed at {str(start_time)}")
 
 
+def keep_app_alive():
+    logging.info("Wake up worker!")
+
+
 if __name__ == "__main__":
     image_event()

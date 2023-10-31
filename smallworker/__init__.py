@@ -1,7 +1,7 @@
 from flask import Flask
 import logging
 import os
-from smallworker.helpers.route_helper import image_event
+from smallworker.helpers.route_helper import image_event, keep_app_alive
 from smallworker.helpers.scheduler_helper import Scheduler
 
 os.environ['FLASK_ENV'] = 'production'
@@ -14,7 +14,8 @@ logging.basicConfig(level=logging.DEBUG,
 
 
 scheduler = Scheduler().scheduler
-scheduler.add_job(image_event, 'interval', hours=12)
+scheduler.add_job(keep_app_alive, 'interval', minutes=20)
+scheduler.add_job(image_event, 'interval', hours=10)
 scheduler.start()
 
 
