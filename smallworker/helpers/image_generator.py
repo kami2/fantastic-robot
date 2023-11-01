@@ -27,7 +27,8 @@ def generate_prompt():
             messages=[
                 {"role": "system", "content": f"Take an event from {random_year} year and describe it as building in maximum of 60 words. "
                                               f"Describe colors, shape, add some details about it. Always start with 'Isometric view of'  "
-                                              f"Good if you refer to country where event happened. You can add some details about surrounding area."}
+                                              f"Good if you refer to country where event happened. You can add some details about surrounding area."
+                                              f" Add words like: high quality, highly detailed"}
             ]
         )
         prompt = completion['choices'][0]['message']['content']
@@ -45,6 +46,7 @@ def create_generation(prompt):
         payload = {
             "height": 768,
             "prompt": prompt,
+            "photoRealStrength": 0.55,
             "width": 512,
             "alchemy": True,
             "guidance_scale": 7,
@@ -55,6 +57,7 @@ def create_generation(prompt):
         }
         response = requests.post(url, headers=get_headers(), json=payload)
         response_json = response.json()
+        logging.info(response_json)
         return response_json['sdGenerationJob']['generationId']
 
     except Exception as e:
