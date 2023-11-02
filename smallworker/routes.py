@@ -16,4 +16,4 @@ def main():
 
 @app.route("/wake_up", methods=['GET'])
 def wake_up():
-    logging.info("Wake up worker!")
+    return "I am awake!"

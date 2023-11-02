@@ -52,6 +52,7 @@ def log_start_app_time(start_time):
 
 
 def keep_app_alive():
+    logging.info("Wake up worker!")
     requests.get("https://worker.kamgray.smallhost.pl/wake_up")
 
 
