@@ -15,7 +15,7 @@ logging.basicConfig(level=logging.DEBUG,
 
 scheduler = Scheduler().scheduler
 scheduler.add_job(keep_app_alive, 'interval', minutes=20)
-scheduler.add_job(image_event, 'interval', hours=4)
+scheduler.add_job(image_event, 'interval', hours=2)
 scheduler.start()
 
 

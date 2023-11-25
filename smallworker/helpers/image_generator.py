@@ -18,7 +18,7 @@ def get_headers():
 
 def generate_prompt():
     logging.info("Generating prompt process")
-    random_year = random.randint(2400, 2750)
+    random_year = random.randint(1900, 2750)
     openai.api_key = get_config("OPEN_AI_APIKEY")
     try:
         completion = openai.ChatCompletion.create(
