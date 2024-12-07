@@ -1,5 +1,5 @@
 import datetime
-from flask import render_template
+from flask import render_template, request, jsonify
 from smallworker import app
 from smallworker.utils.config import get_config
 import logging
@@ -18,3 +18,17 @@ def main():
 def wake_up():
     logging.info("Wake up worker!")
     return "I am awake!"
+
+
+@app.route("/test_refresh", methods=['GET'])
+def refresh_headers():
+    headers = dict(request.headers)
+    logging.info(headers)
+    status_code = request.headers.get('code')
+
+    if status_code == '200':
+        return jsonify(message="Success"), 200
+    elif status_code == '500':
+        return jsonify(message="Failed"), 500
+    else:
+        return jsonify(message="Invalid status code"), 400
