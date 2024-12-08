@@ -1,4 +1,4 @@
-from smallworker.utils.response import get_keep_alive_session
+from smallworker.utils.response import create_session, HTTPAdapterWithCustomPool
 from requests.adapters import Retry
 import logging
 
@@ -16,13 +16,13 @@ def force_headers():
 
 def test_refresh_headers():
     retry_strategy = Retry(
-        total=2,
+        total=5,
         status_forcelist=[104, 408, 429, 500, 502, 503, 504],
         allowed_methods=["HEAD", "GET", "PUT", "DELETE", "OPTIONS", "TRACE"],
         backoff_factor=1
     )
 
-    session = get_keep_alive_session(max_retries=retry_strategy, refresh_headers_func=force_headers)
+    session = create_session(max_retries=retry_strategy, custom_adapter=HTTPAdapterWithCustomPool, headers_on_retry=force_headers)
 
     response = session.get("http://127.0.0.1:5000/test_refresh", headers=get_headers())
 
